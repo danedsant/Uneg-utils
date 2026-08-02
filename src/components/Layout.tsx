@@ -22,6 +22,8 @@ import ChecklistIcon from '@mui/icons-material/Checklist'
 import MenuIcon from '@mui/icons-material/Menu'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import LogoutIcon from '@mui/icons-material/Logout'
+import { useProgressStore } from '../store/progressStore'
 import Logo from './Logo'
 
 const DRAWER_W = 240
@@ -52,13 +54,14 @@ function useCollapsed() {
 
 export default function Layout() {
   const theme = useTheme()
+  const logout = useProgressStore((s) => s.logout)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [collapsed, toggleCollapsed] = useCollapsed()
 
   const drawerWidth = collapsed ? DRAWER_W_MINI : DRAWER_W
 
   const drawerContent = (mini: boolean) => (
-    <Box>
+    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <Toolbar
         sx={{
           gap: 1,
@@ -78,7 +81,7 @@ export default function Layout() {
           </Box>
         )}
       </Toolbar>
-      <List sx={{ px: 1 }}>
+      <List sx={{ px: 1, flexGrow: 1 }}>
         {navItems.map((item) => {
           const link = (
             <NavLink to={item.to} end={item.end} style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -109,6 +112,20 @@ export default function Layout() {
           )
         })}
       </List>
+      {!mini && (
+        <Box
+          sx={{
+            px: 2,
+            py: 1.5,
+            borderTop: '1px solid',
+            borderColor: 'divider',
+          }}
+        >
+          <Typography variant="caption" color="text.secondary" sx={{ display: 'block' }}>
+            Disclaimer: Herramienta estudiantil independiente y no oficial. La información mostrada se basa en documentos de carácter público de la UNEG (plan de estudios, prelaciones y flujo de Trabajo de Grado). Su uso y las decisiones derivadas de ella corresponden a la decisión personal de cada estudiante. 
+          </Typography>
+        </Box>
+      )}
     </Box>
   )
 
@@ -150,6 +167,17 @@ export default function Layout() {
             <Typography variant="caption" sx={{ display: { xs: 'none', md: 'block' }, opacity: 0.9 }}>
               Plan 5 · 178 UC · UNEG
             </Typography>
+          </Tooltip>
+          <Tooltip title="Salir y volver al inicio de sesión">
+            <IconButton
+              color="inherit"
+              edge="end"
+              onClick={logout}
+              aria-label="Salir"
+              sx={{ ml: { xs: 0, md: 1 } }}
+            >
+              <LogoutIcon />
+            </IconButton>
           </Tooltip>
         </Toolbar>
       </AppBar>

@@ -24,6 +24,7 @@ interface ProgressState {
   closeProfileModal: () => void
   toggleRequirement: (id: string) => void
   importState: (payload: ImportedProgress) => void
+  logout: () => void
   resetAll: () => void
 }
 
@@ -58,6 +59,7 @@ export const useProgressStore = create<ProgressState>()(
           grades: payload.grades,
           requirements: payload.requirements,
         }),
+      logout: () => set({ nombre: '', onboarded: false, profileOpen: true }),
       resetAll: () => set({ statuses: {}, grades: {}, requirements: {} }),
     }),
     { name: 'uneg-utils-progress', version: 1 }

@@ -14,9 +14,14 @@ interface ProgressState {
   grades: Record<string, number>
   requirements: Record<string, boolean>
   nombre: string
+  onboarded: boolean
+  profileOpen: boolean
   setStatus: (codigo: string, status: SubjectStatus) => void
   setGrade: (codigo: string, nota: number | null) => void
   setNombre: (nombre: string) => void
+  setOnboarded: (onboarded: boolean) => void
+  openProfileModal: () => void
+  closeProfileModal: () => void
   toggleRequirement: (id: string) => void
   importState: (payload: ImportedProgress) => void
   resetAll: () => void
@@ -29,6 +34,8 @@ export const useProgressStore = create<ProgressState>()(
       grades: {},
       requirements: {},
       nombre: '',
+      onboarded: false,
+      profileOpen: false,
       setStatus: (codigo, status) =>
         set((state) => ({ statuses: { ...state.statuses, [codigo]: status } })),
       setGrade: (codigo, nota) =>
@@ -39,6 +46,9 @@ export const useProgressStore = create<ProgressState>()(
           return { grades }
         }),
       setNombre: (nombre) => set({ nombre }),
+      setOnboarded: (onboarded) => set({ onboarded }),
+      openProfileModal: () => set({ profileOpen: true }),
+      closeProfileModal: () => set({ profileOpen: false }),
       toggleRequirement: (id) =>
         set((state) => ({ requirements: { ...state.requirements, [id]: !state.requirements[id] } })),
       importState: (payload) =>

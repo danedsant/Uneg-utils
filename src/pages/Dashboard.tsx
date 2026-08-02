@@ -9,6 +9,7 @@ import {
   CardHeader,
   Chip,
   Grid,
+  IconButton,
   LinearProgress,
   Stack,
   Typography,
@@ -25,6 +26,7 @@ import {
 } from 'recharts'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked'
+import EditIcon from '@mui/icons-material/Edit'
 import { useProgressStore } from '../store/progressStore'
 import { computeProgress } from '../utils/pensumLogic'
 import { requirements } from '../data/requisitos'
@@ -35,6 +37,7 @@ export default function Dashboard() {
   const grades = useProgressStore((s) => s.grades)
   const requirementsState = useProgressStore((s) => s.requirements)
   const nombre = useProgressStore((s) => s.nombre)
+  const openProfileModal = useProgressStore((s) => s.openProfileModal)
   const stats = useMemo(() => computeProgress(statuses, grades), [statuses, grades])
 
   const chartData = stats.perSemester.map((p) => ({
@@ -47,9 +50,19 @@ export default function Dashboard() {
 
   return (
     <Box>
-      <Typography variant="h4" sx={{ mb: 0.5 }}>
-        {nombre ? `Estatus de ${nombre}` : 'Mi estatus'}
-      </Typography>
+      <Stack direction="row" alignItems="center" spacing={1}>
+        <Typography variant="h4">
+          {nombre ? `Estatus de ${nombre}` : 'Mi estatus'}
+        </Typography>
+        <IconButton
+          size="small"
+          color="primary"
+          onClick={openProfileModal}
+          aria-label="Editar nombre o importar progreso"
+        >
+          <EditIcon fontSize="small" />
+        </IconButton>
+      </Stack>
       <Typography color="text.secondary" sx={{ mb: 3 }}>
         Resumen de tu avance en la carrera de Ingeniería en Informática (Plan 5, 178 UC).
       </Typography>

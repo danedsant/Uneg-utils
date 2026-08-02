@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout'
+import OnboardingModal from './components/OnboardingModal'
 import Dashboard from './pages/Dashboard'
 import PensumPage from './pages/PensumPage'
 import PrelacionesPage from './pages/PrelacionesPage'
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
+      <OnboardingModal />
     </BrowserRouter>
   )
 }

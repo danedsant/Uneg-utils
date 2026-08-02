@@ -38,7 +38,6 @@ export default function PensumPage() {
   const nombre = useProgressStore((s) => s.nombre)
   const setStatus = useProgressStore((s) => s.setStatus)
   const setGrade = useProgressStore((s) => s.setGrade)
-  const setNombre = useProgressStore((s) => s.setNombre)
   const importState = useProgressStore((s) => s.importState)
   const resetAll = useProgressStore((s) => s.resetAll)
 
@@ -140,17 +139,10 @@ export default function PensumPage() {
             Pensum
           </Typography>
           <Typography color="text.secondary">
-            {nombre ? `Pensum de ${nombre} · ` : ''}Ingeniería en Informática · Plan 5 · 9 semestres · 178 UC
+            Ingeniería en Informática · Plan 5 · 9 semestres · 178 UC
           </Typography>
         </Box>
         <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-          <TextField
-            size="small"
-            placeholder="Tu nombre"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
-            sx={{ width: { xs: '100%', sm: 180 } }}
-          />
           <Button startIcon={<FileDownloadIcon />} variant="outlined" onClick={handleExport}>
             Exportar
           </Button>

@@ -22,6 +22,7 @@ import ChecklistIcon from '@mui/icons-material/Checklist'
 import MenuIcon from '@mui/icons-material/Menu'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
+import Logo from './Logo'
 
 const DRAWER_W = 240
 const DRAWER_W_MINI = 76
@@ -65,12 +66,7 @@ export default function Layout() {
           px: mini ? 0 : 2,
         }}
       >
-        <Box
-          component="img"
-          src="/logo-uneg.png"
-          alt="Logo UNEG"
-          sx={{ height: 40, width: 40 }}
-        />
+        <Logo size={40} link />
         {!mini && (
           <Box>
             <Typography variant="h6" sx={{ lineHeight: 1.1 }}>
@@ -138,12 +134,7 @@ export default function Layout() {
           >
             <MenuIcon />
           </IconButton>
-          <Box
-            component="img"
-            src="/logo-uneg.png"
-            alt="Logo UNEG"
-            sx={{ height: 36, width: 36, bgcolor: 'white', borderRadius: 1 }}
-          />
+          <Logo size={36} />
           <Box sx={{ flexGrow: 1 }}>
             <Typography variant="h6" sx={{ lineHeight: 1.1, fontSize: { xs: '1rem', sm: '1.25rem' } }}>
               UNEG Utils
@@ -152,7 +143,7 @@ export default function Layout() {
               variant="caption"
               sx={{ display: { xs: 'none', sm: 'block' }, lineHeight: 1.1, opacity: 0.85 }}
             >
-              Portal auxiliar · Ingeniería en Informática
+              Dashboard de estatus estudiantil - Herramienta no oficial solo para fines informativos
             </Typography>
           </Box>
           <Tooltip title="Datos transcritos del Plan de Estudios (Plan 5, 20/06/2018) y del flujo de la CTG">

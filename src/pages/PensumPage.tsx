@@ -139,7 +139,7 @@ export default function PensumPage() {
             Pensum
           </Typography>
           <Typography color="text.secondary">
-            Ingeniería en Informática · Plan 5 · 9 semestres · 178 UC
+            Ingeniería en Informática · 9 semestres · 178 UC
           </Typography>
         </Box>
         <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>

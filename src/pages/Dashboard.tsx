@@ -129,7 +129,36 @@ export default function Dashboard() {
           </Card>
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12}>
+          <Card>
+            <CardHeader
+              title="Disponibles para inscribir"
+              subheader="Prelaciones cumplidas y sin cursar, ordenadas por semestre"
+              action={
+                <Button component={RouterLink} to="/prelaciones" size="small">
+                  Ver prelaciones
+                </Button>
+              }
+            />
+            <CardContent>
+              {stats.availableSubjects.length === 0 ? (
+                <Typography color="text.secondary" variant="body2">
+                  No hay materias inscribibles con tu avance actual.
+                </Typography>
+              ) : (
+                <Stack direction="row" flexWrap="wrap" useFlexGap gap={1}>
+                  {[...stats.availableSubjects]
+                    .sort((a, b) => a.semestre - b.semestre || a.codigo.localeCompare(b.codigo))
+                    .map((s) => (
+                      <Chip key={s.codigo} size="small" label={`${s.codigo} · Sem ${s.semestre} · ${s.nombre}`} color="primary" variant="outlined" />
+                    ))}
+                </Stack>
+              )}
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item xs={12}>
           <Card>
             <CardHeader
               title="Promedios por semestre"
@@ -156,37 +185,7 @@ export default function Dashboard() {
           </Card>
         </Grid>
 
-        <Grid item xs={12} md={6}>
-          <Card>
-            <CardHeader
-              title="Disponibles para inscribir"
-              subheader="Prelaciones cumplidas y sin cursar"
-              action={
-                <Button component={RouterLink} to="/prelaciones" size="small">
-                  Ver prelaciones
-                </Button>
-              }
-            />
-            <CardContent>
-              {stats.availableSubjects.length === 0 ? (
-                <Typography color="text.secondary" variant="body2">
-                  No hay materias inscribibles con tu avance actual.
-                </Typography>
-              ) : (
-                <Stack direction="row" flexWrap="wrap" useFlexGap gap={1}>
-                  {stats.availableSubjects.slice(0, 14).map((s) => (
-                    <Chip key={s.codigo} size="small" label={`${s.codigo} · ${s.nombre}`} color="primary" variant="outlined" />
-                  ))}
-                  {stats.availableSubjects.length > 14 && (
-                    <Chip size="small" label={`+ ${stats.availableSubjects.length - 14} más`} variant="outlined" />
-                  )}
-                </Stack>
-              )}
-            </CardContent>
-          </Card>
-        </Grid>
-
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12}>
           <Card>
             <CardHeader
               title="En curso"

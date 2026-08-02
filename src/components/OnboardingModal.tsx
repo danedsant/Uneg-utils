@@ -71,6 +71,13 @@ export default function OnboardingModal() {
       fullWidth
       maxWidth="sm"
       disableEscapeKeyDown={isFirstTime}
+      BackdropProps={{
+        sx: {
+          backgroundColor: 'rgba(0,0,0,0.45)',
+          backdropFilter: 'blur(6px)',
+          WebkitBackdropFilter: 'blur(6px)',
+        },
+      }}
     >
       <DialogTitle>{isFirstTime ? 'Bienvenido a UNEG Utils' : 'Tu perfil'}</DialogTitle>
       <DialogContent>

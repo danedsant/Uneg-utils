@@ -25,6 +25,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { useProgressStore } from '../store/progressStore'
 import Logo from './Logo'
+import ConfirmDialog from './ConfirmDialog'
 
 const DRAWER_W = 240
 const DRAWER_W_MINI = 76
@@ -57,6 +58,7 @@ export default function Layout() {
   const logout = useProgressStore((s) => s.logout)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [collapsed, toggleCollapsed] = useCollapsed()
+  const [logoutOpen, setLogoutOpen] = useState(false)
 
   const drawerWidth = collapsed ? DRAWER_W_MINI : DRAWER_W
 
@@ -172,7 +174,7 @@ export default function Layout() {
             <IconButton
               color="inherit"
               edge="end"
-              onClick={logout}
+              onClick={() => setLogoutOpen(true)}
               aria-label="Salir"
               sx={{ ml: { xs: 0, md: 1 } }}
             >
@@ -244,6 +246,18 @@ export default function Layout() {
           </Typography>
         </Box>
       </Box>
+
+      <ConfirmDialog
+        open={logoutOpen}
+        title="Salir"
+        message="Volverás al inicio de sesión. Tu progreso (materias, notas y requisitos) se conserva en este navegador."
+        confirmLabel="Salir"
+        onConfirm={() => {
+          setLogoutOpen(false)
+          logout()
+        }}
+        onCancel={() => setLogoutOpen(false)}
+      />
     </Box>
   )
 }

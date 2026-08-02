@@ -28,6 +28,7 @@ import { prelacionesMet, promedioPonderado, statusOf } from '../utils/pensumLogi
 import { buildExport, validateExport } from '../utils/exportImport'
 import type { DisplayStatus, Subject } from '../types'
 import SubjectCard from '../components/SubjectCard'
+import ConfirmDialog from '../components/ConfirmDialog'
 
 type StatusFilter = 'todos' | DisplayStatus
 
@@ -46,6 +47,7 @@ export default function PensumPage() {
   const [filter, setFilter] = useState<StatusFilter>('todos')
   const [importError, setImportError] = useState(false)
   const [importOk, setImportOk] = useState(false)
+  const [resetOpen, setResetOpen] = useState(false)
 
   const displayStatusOf = (s: Subject): DisplayStatus => {
     const st = statusOf(s, statuses)
@@ -75,9 +77,7 @@ export default function PensumPage() {
   }, [filtered])
 
   const handleReset = () => {
-    if (window.confirm('¿Reiniciar todo tu progreso (materias, notas y requisitos)? Esta acción no se puede deshacer.')) {
-      resetAll()
-    }
+    setResetOpen(true)
   }
 
   const handleExport = () => {
@@ -154,6 +154,19 @@ export default function PensumPage() {
           </Button>
         </Stack>
       </Stack>
+
+      <ConfirmDialog
+        open={resetOpen}
+        title="Reiniciar progreso"
+        message="Se borrarán todas las materias, notas y requisitos registrados. Esta acción no se puede deshacer."
+        confirmLabel="Reiniciar"
+        danger
+        onConfirm={() => {
+          resetAll()
+          setResetOpen(false)
+        }}
+        onCancel={() => setResetOpen(false)}
+      />
 
       <input
         ref={fileInputRef}

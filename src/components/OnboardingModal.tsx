@@ -13,6 +13,7 @@ import {
 import FileUploadIcon from '@mui/icons-material/FileUpload'
 import { useProgressStore } from '../store/progressStore'
 import { validateExport } from '../utils/exportImport'
+import { blurredBackdrop } from '../utils/modalBackdrop'
 import type { ImportedProgress } from '../store/progressStore'
 
 export default function OnboardingModal() {
@@ -71,13 +72,7 @@ export default function OnboardingModal() {
       fullWidth
       maxWidth="sm"
       disableEscapeKeyDown={isFirstTime}
-      BackdropProps={{
-        sx: {
-          backgroundColor: 'rgba(0,0,0,0.45)',
-          backdropFilter: 'blur(6px)',
-          WebkitBackdropFilter: 'blur(6px)',
-        },
-      }}
+      BackdropProps={{ sx: blurredBackdrop }}
     >
       <DialogTitle>{isFirstTime ? 'Bienvenido a UNEG Utils' : 'Tu perfil'}</DialogTitle>
       <DialogContent>

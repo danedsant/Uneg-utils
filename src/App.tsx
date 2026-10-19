@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import Layout from './components/Layout'
 import OnboardingModal from './components/OnboardingModal'
 import Dashboard from './pages/Dashboard'
@@ -21,6 +22,7 @@ export default function App() {
         </Route>
       </Routes>
       <OnboardingModal />
+      <Analytics />
     </BrowserRouter>
   )
 }
